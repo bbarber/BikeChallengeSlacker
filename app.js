@@ -60,6 +60,7 @@ app.get('/', function (req, res) {
                 
                 console.log("success s3 read");
                 console.log(data);
+                console.log(err);
                 console.log(data.Body);
                 
                 // We get back a byte[] from s3, convert to string
