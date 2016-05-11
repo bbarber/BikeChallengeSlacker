@@ -59,15 +59,17 @@ app.get('/', function (req, res) {
             }, function (err, data) {
                 
                 console.log("success s3 read");
+                console.log(data);
+                console.log(data.Body);
                 
                 // We get back a byte[] from s3, convert to string
                 var buf = new Buffer(data.Body.length);
                 for (var i = 0; i < data.Body.length; i++) {
                     buf[i] = data.Body[i];
-                }heroku 
+                } 
                 var last = buf.toString('utf8');
 
-                console.log("beofre upload");
+                console.log("before upload");
 
                 if (last !== body) {
                     s3.upload({ Body: body, ACL: 'public-read', ContentType: 'text/plain' }, function () {
