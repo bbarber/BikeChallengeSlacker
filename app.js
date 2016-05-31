@@ -33,7 +33,7 @@ app.get('/', function (req, res) {
                 return a + Array(maxLength - a.length + 1).join(' ');
             });
 
-            var scores = $('.points-bar>span').map(function (i, a) {
+            var scores = $('.-leader-table-desktop .points-bar>span').map(function (i, a) {
                 return a.children[0].data;
             });
 
