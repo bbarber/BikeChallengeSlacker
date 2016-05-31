@@ -4,16 +4,12 @@ var request = require('request');
 var app = express();
 
 
-app.get('/', function(req, res) {
-
-    console.log("request /");
-    console.log("Host:" + req.get('host'));
+app.head('/', function(req, res) {
 
     var url = 'https://nationalbikechallenge.org/workplace/4511';
     request(url, function(error, response, html) {
         if (!error) {
 
-            console.log("success on request");
             var $ = cheerio.load(html);
 
             var names = $('.-user .-name .title').map(function(i, a) {
@@ -45,7 +41,6 @@ app.get('/', function(req, res) {
             }
 
             var body = list.join('\r\n');
-            console.log("parsed body");
 
             var params = '?token=' + process.env.token + '&channel=%23' + process.env.channel;
             var options = {
@@ -53,7 +48,6 @@ app.get('/', function(req, res) {
                 body: "```" + body + "```"
             };
 
-            console.log("Before slack post");
             request.post(options);
 
             res.send('<pre>' + body + '</pre>');
